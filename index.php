@@ -19,8 +19,8 @@
 			<span id="overview"></span>
 			<span id="release"></span>
 			<span id="language"></span>
+			<span id="imdb"></span>
 		</div>
-		<span id="imdb"></span>
 		<div id="actions">
 			<button id="skip_it" class="button">Skip Movie</button>
 			<button id="watched_it" class="button">Watched Movie</button>

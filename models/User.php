@@ -2,14 +2,14 @@
 
 class User
 {
-	private $_id;
+	public $id;
 	private $_data;
 	private $_username;
 
 
 	public function __construct($id, $data)
 	{
-		$this->_id = $id;
+		$this->id = $id;
 		$this->_data = $data;
 	}
 

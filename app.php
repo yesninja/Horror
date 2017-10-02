@@ -24,6 +24,7 @@ unset($_POST["m"]);
 unset($_GET["c"]);
 unset($_GET["m"]);
 
+Session::start();
 Request::load($_GET,$_POST);
 
 $controller = ControllerLoader::run($controller,$method);

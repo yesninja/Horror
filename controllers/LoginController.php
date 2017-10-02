@@ -8,11 +8,11 @@ class LoginController extends Controller
 
 	public function login()
 	{
-		$data = Resquest::get();
+		$data = Request::get();
 
 		if (!$data["username"] || !$data["password"]) return;
 
-		$password = md5($data["password"].SALT);
+		$password = md5($data["password"].self::SALT);
 
 		$stmt = $this->db->prepare("SELECT * FROM `users` WHERE `username` = ? AND `password` = ?");
 		$stmt->execute(array($data["username"],$password));
@@ -21,7 +21,6 @@ class LoginController extends Controller
 		
 		if ($row)
 		{
-			Session::start();
 			Session::set("user_id",$row["id"]);
 			return true;
 		}
@@ -31,11 +30,11 @@ class LoginController extends Controller
 
 	public function register()
 	{
-		$data = Resquest::get();
+		$data = Request::get();
 
 		if (!$data["username"] || !$data["password"]) return;
 
-		$password = md5($data["password"].SALT);
+		$password = md5($data["password"].self::SALT);
 
 		$stmt = $this->db->prepare("INSERT INTO `users` VALUES (NULL,?,?,UNIX_TIMESTAMP()) ON DUPLICATE KEY UPDATE `id`=`id`");
 		$stmt->execute(array($data["username"],$password));

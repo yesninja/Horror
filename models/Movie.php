@@ -20,7 +20,7 @@ class Movie
 
 	public static function getRandom(PDO $db, $user_id, $conditions=false)
 	{
-		$where = "WHERE ";
+		$where = "WHERE (1) ";
 		$join = "";
 
 		if (!$conditions)
@@ -32,56 +32,98 @@ class Movie
 			);
 		}
 
-		foreach($conditions as $cond)
+		foreach($conditions as $cond=>$value)
 		{
-			if ($cond=="skip_watched")
+			if ($cond=="skip_watched" && $value)
 			{
 				$skipWatchedMovies = true;
 			}
-			else if ($cond == "skip_skipped")
+			else if ($cond == "skip_skipped" && $value)
 			{
 				$skipSkippedMovies = true;
 			}
-			else if (is_array($cond))
+			else if (is_array($value))
 			{
-				$where .= " `".$cond[0] ."` " . $cond[1] . " ?";
-				$values[] = $cond[2];
+				$where .= " `".$value[0] ."` " . $value[1] . " ?";
+				$whereValues[] = $value[2];
 			} 
 		}
-
-		$values[] = $user_id;
 
 		// Remove results
 		if ($skipWatchedMovies)
 		{
-			$join = " LEFT JOIN `watched_movies` 
+			$join .= " LEFT JOIN `watched_movies` 
 						ON 
 							`movies`.`mdb_id`=`watched_movies`.`mdb_id`
 						AND 
 							`watched_movies`.`user_id`=?
 			";
-			$where .= " `watched_movies`.`id` IS NULL";
+			$where .= " AND `watched_movies`.`id` IS NULL";
+			$values[] = $user_id;
 		}
 
 		if ($skipSkippedMovies)
 		{
-			$join = " LEFT JOIN `skipped_movies` 
+			$join .= " LEFT JOIN `skipped_movies` 
 						ON 
 							`movies`.`mdb_id`=`skipped_movies`.`mdb_id`
 						AND 
 							`skipped_movies`.`user_id`=?
 			";
-			$where .= " `skipped_movies`.`id` IS NULL";
+			$where .= " AND `skipped_movies`.`id` IS NULL";
+			$values[] = $user_id;
 		}
 
-		$query = "SELECT * FROM `movies` ".$join." ".$where." LIMIT 1";
+		foreach($whereValues as $vals)
+		{
+			$values[] = $vals;
+		}
+		
+		$query = "SELECT `movies`.* FROM `movies` ".$join." ".$where." ORDER BY RAND() LIMIT 1";
 		$stmt = $db->prepare($query);
 		$stmt->execute($values);
 
 		echo $query;
 
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-		
-		return $row;
+
+		if ($row)
+		{
+			self::setCurrent($row["id"]);
+			return $row;
+		}
+
+		return false;
+	}
+
+	public static function getCurrent(PDO $db, $user_id)
+	{
+		$stmt = $db->query("SELECT * FROM `movies` WHERE `id` = (SELECT `movie_id` FROM `watching` WHERE `user_id` = ?)");
+		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+		if ($row)
+		{
+			return $row;
+		}
+		return false;
+	}
+
+	public static function setCurrent(PDO $db, $user_id, $id)
+	{
+		$stmt = $db->prepare("INSERT INTO `watching` VALUES (?,?,UNIX_TIMESTAMP()) ON DUPLICATE KEY UPDATE `movie_id`=VALUES(`movie_id`),`timestamp` = UNIX_TIMESTAMP()");
+		$stmt->execute(array($user_id,$id));
+	}
+
+	public static function watch(PDO $db, $user_id)
+	{
+		$cur = Movie::getCurrent($user_id);
+		$stmt = $db->prepare("INSERT INTO `watched_movies` VALUES (NULL,?,?,UNIX_TIMESTAMP()) ON DUPLICATE KEY UPDATE `id`=`id`,`timestamp` = UNIX_TIMESTAMP()");
+		$stmt->execute(array($cur["id"],$user_id));
+	}
+
+	public static function skip(PDO $db, $user_id)
+	{
+		$cur = Movie::getCurrent($user_id);
+		$stmt = $db->prepare("INSERT INTO `skipped_movies` VALUES (NULL,?,?,UNIX_TIMESTAMP()) ON DUPLICATE KEY UPDATE `id`=`id`,`timestamp` = UNIX_TIMESTAMP()");
+		$stmt->execute(array($cur["id"],$user_id));
 	}
 }

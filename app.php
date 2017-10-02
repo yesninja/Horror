@@ -26,6 +26,13 @@ unset($_GET["m"]);
 
 Request::load($_GET,$_POST);
 
-$controller = ControllerLoader::run($c,$m);
+$controller = ControllerLoader::run($controller,$method);
 
-echo $controller->getResponse();
+if ($controller)
+{
+	echo $controller->getResponse();
+}
+else
+{
+	echo "No Response from $controller :: $method ()";
+}

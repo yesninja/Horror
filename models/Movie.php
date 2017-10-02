@@ -26,8 +26,8 @@ class Movie
 		if (!$conditions)
 		{
 			$conditions = array(
-				"skip_watched" = true,
-				"skip_skipped" = true,
+				"skip_watched" => true,
+				"skip_skipped" => true,
 				array("imdb_rating",">","5.0"),
 			);
 		}
@@ -40,7 +40,7 @@ class Movie
 			}
 			else if ($cond == "skip_skipped")
 			{
-				$skipSkippedMovies = tru;
+				$skipSkippedMovies = true;
 			}
 			else if (is_array($cond))
 			{
@@ -79,5 +79,9 @@ class Movie
 		$stmt->execute($values);
 
 		echo $query;
+
+		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+		
+		return $row;
 	}
 }

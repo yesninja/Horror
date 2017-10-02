@@ -3,8 +3,8 @@
 class Request
 {
 	
-	private $_get = array();
-	private $_post = array();
+	private static $_get = array();
+	private static $_post = array();
 
 	public static function load($get, $post)
 	{

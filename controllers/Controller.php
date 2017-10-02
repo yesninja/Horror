@@ -2,10 +2,10 @@
 
 class Controller
 {
-	private $_response = array();
+	public $response = array();
 
 	public function getResponse()
 	{
-		return json_encode($_response);
+		return json_encode($this->response);
 	}
 }

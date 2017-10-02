@@ -10,6 +10,6 @@ class LoginController extends Controller
 
 	public function register()
 	{
-		$this->_response = array("Hello","World");
+		$this->response = array("Hello","World");
 	}
 }

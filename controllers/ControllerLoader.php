@@ -8,18 +8,14 @@ class ControllerLoader
 		if (!$class || !$method) return;
 
 		$controller = $class."Controller";
-		
-		if (!file_exists($controller)) return;
-
-		require_once($controller);
 
 		if (!class_exists($controller)) return;
 
-		if (!method_exists($class, $method)) return;
+		if (!method_exists($controller, $method)) return;
 
 		$object = new $controller;
 
-		$object->$method;
+		$object->$method();
 
 		return $object;
 	}

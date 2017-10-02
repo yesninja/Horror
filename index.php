@@ -8,28 +8,28 @@
 
 <body>
 	<div id="content">
-		<dic id="title"></div>
-		<div id="image"><img src=""</div>
+		<div id="image"><img id ="poster" src=""/></div>
 		<div id="tools">
 			<span id="trailer"></span>
-			<span id="imdb"></span>
 		</div>
 		<div id="desc">
+			<div id="title"></div>
 			<span id="overview"></span>
 			<span id="release"></span>
 			<span id="language"></span>
 		</div>
-
+		<span id="imdb"></span>
 		<div id="actions">
-			<button id="skip_it">Skip Movie</button>
-			<button id="watched_it">Watched Movie</button>
+			<button id="skip_it" class="button">Skip Movie</button>
+			<button id="watched_it" class="button">Watched Movie</button>
 		</div>
 
 		<div id="watched"></div>
 		<div id="skipped"></div>
-	<div>
+	</div>
 	<div id="footer">
 		<span>Horror Helper 2017</span>
+	</div>
 </body>
 
 <script type="text/javascript" src="www/js/app.js"></script>
@@ -47,8 +47,7 @@ $( document ).ready(function() {
 
 	$.post( app_url, data)
 	  .done(function( data ) {
-	    var obj = JSON.parse(data);
-	    displayMovie(obj);
+	    displayMovie(data);
 	});
 
 	// Clicks...
@@ -61,8 +60,7 @@ $( document ).ready(function() {
 
 		$.post( app_url, data)
 		  .done(function( data ) {
-		    var obj = JSON.parse(data);
-		    displayMovie(obj);
+		    displayMovie(data);
 		});		  
 	});
 
@@ -75,8 +73,7 @@ $( document ).ready(function() {
 		
 		$.post( app_url, data)
 		  .done(function( data ) {
-		    var obj = JSON.parse(data);
-		    displayMovie(obj);
+			displayMovie(data);
 		});		  
 	});
 });
@@ -84,11 +81,11 @@ $( document ).ready(function() {
 function displayMovie(obj)
 {
 	$("#title").html(obj.title);
-    $("#image").attr("src","https://image.tmdb.org/t/p/w640/"+obj.poster_path);
+    $("#poster").attr("src","https://image.tmdb.org/t/p/w640/"+obj.poster_path);
     if (obj.trailer_link) {
-    	$("#trailer").html("<iframe width="420" height="315" src='https://www.youtube.com/embed/"+obj.trailer_link+"'></iframe>");
+    	$("#trailer").html("<iframe width='420' height='315' src='https://www.youtube.com/embed/"+obj.trailer_link+"'></iframe>");
     } else {
-    	$("#trailer").html("No Trailer Found :( ");
+    	$("#trailer").html("");
     }
     if (obj.imdb_rating || obj.imdb_id) {
     	var imdb_html = obj.imdb_rating;
@@ -106,8 +103,8 @@ function displayMovie(obj)
     	$("#imdb").html("No IMDB data :(");
     }
     $("#overview").html(obj.overview);
-    $("#release").html(obj.release_date);
-    $("#language").html(obj.language);
+    $("#release").html("Released: "+obj.release_date);
+    $("#language").html("Language: "+obj.language);
 }
 
 </script>

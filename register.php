@@ -16,21 +16,18 @@
 		  </div>
 
 		  <div class="container">
-		  	<div style="text-align: center;font-size: 40px;">Login Form</div>
-			<div id="error" style="display:none;background-color:#f1f1f1;text-align:center">
-				<span> Need an Account? <a href="register.php">Register Here</a></span>
-			</div>
+		  	<div style="text-align: center;font-size: 40px;">Register Form</div>
 		    <label><b>Username</b></label>
 		    <input id="username" type="text" placeholder="Enter Username" name="username" required>
 
 		    <label><b>Password</b></label>
 		    <input id="password" type="password" placeholder="Enter Password" name="password" required>
 
-		    <button type="submit">Login</button>
+		    <button type="submit">Register Me</button>
 		  </div>
 
 		  <div class="container" style="background-color:#f1f1f1;text-align:center">
-		    <span> Need an Account? <a href="register.php">Register Here</a></span>
+		    <span> Already Have an Account? <a href="login.php">Login Here</a></span>
 		  </div>
 		</form>
 	</div>

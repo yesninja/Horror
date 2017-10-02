@@ -22,10 +22,10 @@ class LoginController extends Controller
 		if ($row)
 		{
 			Session::set("user_id",$row["id"]);
-			return true;
+			$this->response = $user_id;
 		}
 
-		return false;
+		$this->response = false;
 	}
 
 	public function register()
@@ -40,6 +40,13 @@ class LoginController extends Controller
 		$stmt->execute(array($data["username"],$password));
 
 		$user_id = $this->db->lastInsertId();
-		return $user_id;
+
+		if ($user_id)
+		{
+			Session::set("user_id",$user_id);
+			$this->response = $user_id;
+		}
+
+		$this->response = false;
 	}
 }

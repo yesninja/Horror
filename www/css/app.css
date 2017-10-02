@@ -49,6 +49,9 @@ button.button{
     margin: 55px;
 }
 
+#skip_it{
+	background-color:#868686;
+}
 
 /* Bordered form */
 form {

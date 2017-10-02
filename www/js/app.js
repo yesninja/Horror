@@ -38,6 +38,49 @@ $( document ).ready(function() {
 			displayMovie(data);
 		});		  
 	});
+
+
+	$( "#login_form" ).submit(function( event ) {
+	  	event.preventDefault();
+		var data = {
+			"c":"Login",
+			"m":"login",
+			"username": $( "#username" ).val(),
+			"username": $( "#password" ).val(),
+		};
+
+		$.post( app_url, data)
+		  .done(function( data ) {
+			if (data) {
+				window.location = "/";
+			} else {
+				$("#error").html("ERROR Loggin in");
+				$("#error").show();
+			}
+			return false;
+		});	
+	});
+
+	$( "#register_form" ).submit(function( event ) {
+	  	event.preventDefault();
+		var data = {
+			"c":"Login",
+			"m":"register",
+			"username": $( "#username" ).val(),
+			"username": $( "#password" ).val(),
+		};
+
+		$.post( app_url, data)
+		  .done(function( data ) {
+			if (data) {
+				window.location = "/";
+			} else {
+				$("#error").html("ERROR registering username and password");
+				$("#error").show();
+			}
+			return false;
+		});
+	});
 });
 
 function displayMovie(obj)
@@ -58,11 +101,11 @@ function displayMovie(obj)
     	var imdb_html = obj.imdb_rating;
     	if (obj.imdb_id)
     	{
-    		 imdb_html = "<a href='http://www.imdb.com/title/"+obj.imdb_id+"' target='_blank'>"+obj.imdb_rating+"</a>";
+    		 imdb_html = "IMDB: <a href='http://www.imdb.com/title/"+obj.imdb_id+"' target='_blank'>"+obj.imdb_rating+"</a>";
     	}
     	else
     	{
-    		imdb_html = "<a href='http://www.imdb.com/title/"+obj.imdb_id+"' target='_blank'>"+obj.imdb_rating+"</a>";
+    		imdb_html = "IMDB: "+obj.imdb_rating;
     	}
 
     	$("#imdb").html(imdb_html);

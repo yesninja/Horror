@@ -42,12 +42,17 @@ $( document ).ready(function() {
 
 function displayMovie(obj)
 {
+	if (obj == "0")
+	{
+		window.location = "/login.php";
+		return;
+	}
 	$("#title").html(obj.title);
     $("#poster").attr("src","https://image.tmdb.org/t/p/w640/"+obj.poster_path);
     if (obj.trailer_link) {
     	$("#trailer").html("<iframe width='420' height='315' src='https://www.youtube.com/embed/"+obj.trailer_link+"'></iframe>");
     } else {
-    	$("#trailer").html("");
+    	$("#trailer").html("Couldn't find trailer :(");
     }
     if (obj.imdb_rating || obj.imdb_id) {
     	var imdb_html = obj.imdb_rating;

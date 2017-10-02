@@ -6,6 +6,11 @@ error_reporting(E_ERROR);
 
 require_once("bootstrap.php");
 
+if (!Session::loggedIn())
+{
+	exit(255);
+}
+
 $controller = $_POST["c"];
 $method = $_POST["m"];
 

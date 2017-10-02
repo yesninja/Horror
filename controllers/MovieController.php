@@ -6,19 +6,20 @@ class MovieController extends Controller
 	public function getNextMovie()
 	{
 		$data = Request::get();
-		$db = Database::connectDB();
+		
+		$user = User::get(Session::get("user_id"));
 
 		$conds = array();
 		if ($data["watched"])
 		{
-			Movie::watch($db,"1");
+			Movie::watch($this->db,$user_id);
 		}
 		else if ($data["skip"])
 		{
-			Movie::skip($db,"1");
+			Movie::skip($this->db,$user_id);
 		}
 
-		$movie = Movie::getRandom($db, "1");
+		$movie = Movie::getRandom($db, $user_id);
 
 		return $movie;
 	}

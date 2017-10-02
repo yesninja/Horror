@@ -34,18 +34,18 @@ class Movie
 
 		foreach($conditions as $cond=>$value)
 		{
-			if ($cond=="skip_watched" && $value)
+			if (is_array($value))
+			{
+				$where .= " AND `".$value[0] ."` " . $value[1] . " ?";
+				$whereValues[] = $value[2];
+			}
+			else if ($cond=="skip_watched" && $value)
 			{
 				$skipWatchedMovies = true;
 			}
 			else if ($cond == "skip_skipped" && $value)
 			{
 				$skipSkippedMovies = true;
-			}
-			else if (is_array($value))
-			{
-				$where .= " `".$value[0] ."` " . $value[1] . " ?";
-				$whereValues[] = $value[2];
 			} 
 		}
 
@@ -78,7 +78,7 @@ class Movie
 		{
 			$values[] = $vals;
 		}
-		
+
 		$query = "SELECT `movies`.* FROM `movies` ".$join." ".$where." ORDER BY RAND() LIMIT 1";
 		$stmt = $db->prepare($query);
 		$stmt->execute($values);
@@ -89,7 +89,7 @@ class Movie
 
 		if ($row)
 		{
-			self::setCurrent($row["id"]);
+			self::setCurrent($db, $user_id, $row["id"]);
 			return $row;
 		}
 

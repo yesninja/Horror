@@ -2,28 +2,37 @@
 
 class User
 {
-	private $id;
+	private $_id;
+	private $_data;
+	private $_username;
 
-	public function create(array $data)
+
+	public function __construct($id, $data)
+	{
+		$this->_id = $id;
+		$this->_data = $data;
+	}
+
+	public static function create(PDO $db, array $data)
 	{
 
 	}
 
-	public function get(PDO $db,$id)
+	public static function get(PDO $db,$id)
 	{
+		$stmt = $db->prepare("SELECT * FROM `users` WHERE `id` = ?");
+		$stmt->execute(array($id));
+		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-	}
-
-	public function nextMovie(PDO $db,$user_id,$conditions=false)
-	{
-		$movie = false;
-
-		if ($this->id)
+		if ($row)
 		{
-			$movie = Movie::RandMovie($db,$this->id,$conditions);
+			$user_id = $row["id"];
+			unset($row["id"]);
+			$user = new User($user_id,$row);
+			return $user;
 		}
 
-		return $movie;
+		return false;
 	}
 
 	public function watchedMovies()

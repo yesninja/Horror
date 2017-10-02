@@ -15,6 +15,14 @@ class ControllerLoader
 
 		$object = new $controller;
 
+		if (!$object->no_auth)
+		{
+			if (!Session::isLoggedIn())
+			{
+				exit(255);
+			}
+		}
+
 		$object->$method();
 
 		return $object;

@@ -3,7 +3,7 @@
 class Session
 {
 	
-	public function isLoggedIn()
+	public static function isLoggedIn()
 	{
 		if (self::get("user_id"))
 		{
@@ -12,7 +12,7 @@ class Session
 
 		return false;
 	}
-	
+
 	public static function start()
 	{
 		session_start();

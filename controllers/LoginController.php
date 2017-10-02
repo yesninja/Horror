@@ -4,6 +4,7 @@ class LoginController extends Controller
 {
 	
 	const SALT = "PEPPERONIFACE";
+	public $no_auth = true;
 
 	public function login()
 	{

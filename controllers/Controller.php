@@ -4,6 +4,7 @@ class Controller
 {
 	public $response = array();
 	public $db;
+	public $no_auth = false;
 
 	public function __construct()
 	{

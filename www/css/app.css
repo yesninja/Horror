@@ -1,0 +1,44 @@
+#content{
+	margin: 0 auto;
+}
+#image{
+    width: 35%;
+	float:left;
+}
+#tools{
+    max-width: 32%;
+	float:right;
+}
+#title{
+	text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+}
+#desc{
+	max-width: 32%;
+    float: left;
+}
+#overview{
+	display: inline-block;
+    padding: 20px;
+    margin: 10px 20px;
+    font-size: 15pt;
+}
+#release{
+	display: inline-block;
+    padding: 20px;
+    margin: 10px 20px;
+}
+#actions{
+	width: 32%;
+    float: left;
+    text-align: center;
+}
+#footer{
+	clear:both;
+}
+
+button.button{
+	padding: 15px;
+    margin: 55px;
+}

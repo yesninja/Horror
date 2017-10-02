@@ -7,10 +7,13 @@ $( document ).ready(function() {
 		"m":"getCurrentMovie"
 	};
 
-	$.post( app_url, data)
-	  .done(function( data ) {
-	    displayMovie(data);
-	});
+	if (window.location.pathname == "/horror/")
+	{
+		$.post( app_url, data)
+		  .done(function( data ) {
+		    displayMovie(data);
+		});
+	}
 
 	// Clicks...
 	$( "#watched_it" ).on("click", function() {
@@ -85,7 +88,7 @@ $( document ).ready(function() {
 
 function displayMovie(obj)
 {
-	if (obj == "0")
+	if (!obj)
 	{
 		window.location = "login.php";
 		return;

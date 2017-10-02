@@ -22,7 +22,8 @@ class LoginController extends Controller
 		if ($row)
 		{
 			Session::set("user_id",$row["id"]);
-			$this->response = $user_id;
+			$this->response = $row["id"];
+			return;
 		}
 
 		$this->response = false;
@@ -45,6 +46,7 @@ class LoginController extends Controller
 		{
 			Session::set("user_id",$user_id);
 			$this->response = $user_id;
+			return;
 		}
 
 		$this->response = false;

@@ -10,7 +10,7 @@
 
 <body>
 	<div id="content">
-		<form id="login_form" action="app.php">
+		<form id="register_form" action="app.php">
 		  <div class="imgcontainer">
 		    <img src="www/images/Alucard.png" alt="Avatar" class="avatar">
 		  </div>

@@ -83,8 +83,6 @@ class Movie
 		$stmt = $db->prepare($query);
 		$stmt->execute($values);
 
-		echo $query;
-
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		if ($row)
@@ -99,6 +97,8 @@ class Movie
 	public static function getCurrent(PDO $db, $user_id)
 	{
 		$stmt = $db->query("SELECT * FROM `movies` WHERE `id` = (SELECT `movie_id` FROM `watching` WHERE `user_id` = ?)");
+		$stmt->execute(array($user_id));
+
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		if ($row)
 		{
@@ -115,14 +115,14 @@ class Movie
 
 	public static function watch(PDO $db, $user_id)
 	{
-		$cur = Movie::getCurrent($user_id);
+		$cur = Movie::getCurrent($db, $user_id);
 		$stmt = $db->prepare("INSERT INTO `watched_movies` VALUES (NULL,?,?,UNIX_TIMESTAMP()) ON DUPLICATE KEY UPDATE `id`=`id`,`timestamp` = UNIX_TIMESTAMP()");
 		$stmt->execute(array($cur["id"],$user_id));
 	}
 
 	public static function skip(PDO $db, $user_id)
 	{
-		$cur = Movie::getCurrent($user_id);
+		$cur = Movie::getCurrent($db, $user_id);
 		$stmt = $db->prepare("INSERT INTO `skipped_movies` VALUES (NULL,?,?,UNIX_TIMESTAMP()) ON DUPLICATE KEY UPDATE `id`=`id`,`timestamp` = UNIX_TIMESTAMP()");
 		$stmt->execute(array($cur["id"],$user_id));
 	}

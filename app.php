@@ -31,6 +31,7 @@ $controller = ControllerLoader::run($controller,$method);
 
 if ($controller)
 {
+	header('Content-Type: application/json');
 	echo $controller->getResponse();
 }
 else

@@ -10,14 +10,14 @@ class MovieController extends Controller
 		$user = User::get($this->db,Session::get("user_id"));
 		if (!$user) return false;
 
-		$movie = Movie::getCurrentMovie();
+		$movie = Movie::getCurrent($this->db, $user->id);
 
 		if (!$movie)
 		{
 			$movie = Movie::getRandom($this->db, $user->id);
 		}
 
-		return $movie;
+		$this->response = $movie;
 	}
 
 	public function getNextMovie()
@@ -41,6 +41,6 @@ class MovieController extends Controller
 
 		$movie = Movie::getRandom($this->db, $user_id);
 
-		return $movie;
+		$this->response = $movie;
 	}
 }

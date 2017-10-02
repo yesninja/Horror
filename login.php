@@ -12,7 +12,7 @@
 	<div id="content">
 		<form id="login_form" action="app.php">
 		  <div class="imgcontainer">
-		    <img width="200" src="www/images/Alucard.png" alt="Avatar" class="avatar">
+		    <img src="www/images/Alucard.png" alt="Avatar" class="avatar">
 		  </div>
 
 		  <div class="container">

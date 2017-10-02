@@ -99,7 +99,7 @@ button:hover {
 
 /* Avatar image */
 img.avatar {
-    width: 40%;
+    width: 200px;
     border-radius: 50%;
 }
 

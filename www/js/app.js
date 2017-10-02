@@ -46,13 +46,13 @@ $( document ).ready(function() {
 			"c":"Login",
 			"m":"login",
 			"username": $( "#username" ).val(),
-			"username": $( "#password" ).val(),
+			"password": $( "#password" ).val(),
 		};
 
 		$.post( app_url, data)
 		  .done(function( data ) {
 			if (data) {
-				window.location = "/";
+				window.location = "/horror/";
 			} else {
 				$("#error").html("ERROR Loggin in");
 				$("#error").show();
@@ -67,13 +67,13 @@ $( document ).ready(function() {
 			"c":"Login",
 			"m":"register",
 			"username": $( "#username" ).val(),
-			"username": $( "#password" ).val(),
+			"password": $( "#password" ).val(),
 		};
 
 		$.post( app_url, data)
 		  .done(function( data ) {
 			if (data) {
-				window.location = "/";
+				window.location = "/horror/";
 			} else {
 				$("#error").html("ERROR registering username and password");
 				$("#error").show();
@@ -87,7 +87,7 @@ function displayMovie(obj)
 {
 	if (obj == "0")
 	{
-		window.location = "/login.php";
+		window.location = "login.php";
 		return;
 	}
 	$("#title").html(obj.title);

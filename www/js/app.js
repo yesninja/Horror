@@ -158,7 +158,7 @@ function displayMovie(obj) {
     }
 
     $("#overview").html(obj.overview);
-    $("#release").html(obj.status": "+obj.release_date);
+    $("#release").html(obj.status+": "+obj.release_date);
     if (obj.runtime) {
     	$("#runtime").html("Runtime: "+obj.runtime+"m");
     } else {

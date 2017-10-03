@@ -171,23 +171,23 @@ function displayMovie(obj) {
     $("#language").html("Language: "+obj.language);
 
     if (obj.conditions) {
-    	var search_html = "";
+    	var search_html = "<div>Search Query: ";
     	for (var key in obj.conditions) {
     		if (typeof obj.conditions[key] === 'object') {
-    			search_html += obj.conditions[key][0]+" "+obj.conditions[key][1]+" "+obj.conditions[key][2]+" ";
+    			search_html += "<span>"+obj.conditions[key][0]+" "+obj.conditions[key][1]+" "+obj.conditions[key][2]+"<span>";
     		}
     	}
-
+    	search_html += "</div>";
     	$("#search_conditions").html(search_html);
     }
 
     if (obj.counts) {
-    	var count_html = "";
+    	var count_html = "<div id='counts'>";
     	count_html += "<div>Total Movies: "+obj.counts.query+" / "+obj.counts.total+"  </div>";
     	count_html += "<div>Total Watched: "+obj.counts.watched+"</div>";
     	count_html += "<div>Total Stored: "+obj.counts.stored+"</div>";
     	count_html += "<div>Total Skipped: "+obj.counts.skipped+"</div>";
-
+    	count+html += "</div>";
     	$("#watch_counts").html(count_html);
     }
     

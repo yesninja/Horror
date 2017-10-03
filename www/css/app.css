@@ -54,12 +54,12 @@ button.button{
 .movie-container{
     clear: both;
     background-color:#f1f1f1;
-    width:100%;
-    margin:20px;
-    padding:10px;
+    width: 95%;
+    padding:20px;
     float: left;
 }
 .small-movie{
+    margin:0 20px 30px;
     width: 250px;
     float:left;
 }
@@ -71,7 +71,8 @@ button.button{
     display: inline-block;
 }
 .small-movie-poster{
-
+    width: 220px;
+    height: 300px;
 }
 /* Bordered form */
 form {

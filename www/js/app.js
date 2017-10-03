@@ -164,12 +164,20 @@ function displayMovieContainer(id, objects) {
 
 	var html = "";
 	for (var key in objects) {
-		var elem = "<div class='small-movie' data-movie-id='"+objects[key].id+"'>";
-		elem += "<img class='small-movie-poster' width='240' src='https://image.tmdb.org/t/p/w320/"+objects[key].poster_path+"'/>";
-		elem += "<span class='small-movie-title'>"+objects[key].title+"</span>";
+		var elem = "<div class='small-movie' data-movie-id='"+objects[key].id+"' title='"+objects[key].title+"'>";
+		elem += "<img class='small-movie-poster' src='https://image.tmdb.org/t/p/w320/"+objects[key].poster_path+"'/>";
+		//elem += "<span class='small-movie-title'>"+objects[key].title+"</span>";
 		elem += "</div>";
 		html += elem;
 	}
 
 	$("#"+id+ " span").html(html);
+
+	$( ".small-movie" ).tooltip({
+      hide: {
+        effect: "explode",
+        delay: 250
+      }
+    });
+    
 }

@@ -26,7 +26,7 @@ $( document ).ready(function() {
 		$.post( app_url, data)
 		  .done(function( data ) {
 		    displayMovie(data);
-		    displayMovieContainer("watched",[data]);
+		    addSmallMovieToContainer("watched",data);
 		});
 	});
 
@@ -40,7 +40,7 @@ $( document ).ready(function() {
 		$.post( app_url, data)
 		  .done(function( data ) {
 			displayMovie(data);
-			displayMovieContainer("skipped",[data]);
+			addSmallMovieToContainer("skipped",data);
 		});
 	});
 
@@ -54,7 +54,7 @@ $( document ).ready(function() {
 		$.post( app_url, data)
 		  .done(function( data ) {
 			displayMovie(data);
-			displayMovieContainer("store",[data]);
+			addSmallMovieToContainer("store",data);
 		});
 	});
 
@@ -172,16 +172,39 @@ function displayMovieContainer(id, objects) {
 
 	if (!objects) return;
 
+	var html = "";
 	for (var key in objects) {
 		if (!objects[key].id) continue;
 
-		var elem = "<div id='small-movie-"+objects[key].id+"' class='small-movie' data-movie-id='"+objects[key].id+"'>";
-		elem += "<img class='small-movie-poster' src='https://image.tmdb.org/t/p/w320/"+objects[key].poster_path+"'/>";
-		elem += "<span style='display:none;' class='small-movie-title'>"+objects[key].title+"</span>";
-		elem += "</div>";
-		$("#"+id+"span").prepend(elem);
+		 var elem = getSmallMovieHTML(objects[key]);
+		 html += elem;
+	}
 
-		$( "#small-movie-"+objects[key].id ).tooltip({
+	$("#"+id+" span").append(html);
+	addToolTip("small-movie");
+}
+
+function addSmallMovieToContainer(obj) {
+	if (!obj.id) continue;
+
+	var elem = getSmallMovieHTML(obj);
+	$("#"+id+" span").prepend(elem);
+	addToolTip("small-movie");
+}
+
+
+function getSmallMovieHTML(obj) {
+	var elem = "<div id='small-movie-"+objects[key].id+"' class='small-movie' data-movie-id='"+objects[key].id+"'>";
+	elem += "<img class='small-movie-poster' src='https://image.tmdb.org/t/p/w320/"+objects[key].poster_path+"'/>";
+	elem += "<span style='display:none;' class='small-movie-title'>"+objects[key].title+"</span>";
+	elem += "</div>";
+
+	return elem;
+}
+
+
+function addToolTip(id) {
+			$( "#"+id ).tooltip({
 		  items: "[data-movie-id]",
 		  content: function() {
 	      	var element = $( this );
@@ -223,5 +246,4 @@ function displayMovieContainer(id, objects) {
 	        });
 			  }
 	  });
-	}
 }

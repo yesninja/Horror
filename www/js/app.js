@@ -166,7 +166,7 @@ function displayMovieContainer(id, objects) {
 	for (var key in objects) {
 		var elem = "<div id='small-movie-"+objects[key].id+"' class='small-movie' data-movie-id='"+objects[key].id+"'>";
 		elem += "<img class='small-movie-poster' src='https://image.tmdb.org/t/p/w320/"+objects[key].poster_path+"'/>";
-		elem += "<span style='display-none;' class='small-movie-title'>"+objects[key].title+"</span>";
+		elem += "<span style='display:none;' class='small-movie-title'>"+objects[key].title+"</span>";
 		elem += "</div>";
 		html += elem;
 	}
@@ -174,9 +174,13 @@ function displayMovieContainer(id, objects) {
 	$("#"+id+ " span").html(html);
 
 	$( ".small-movie" ).tooltip({
+	  items: "[data-movie-id]",
 	  content: function() {
       	var element = $( this );
-      	console.log(this);
+	  	var movie_id = element.data("movie-id");
+      	var title = "<span class='tooltip-title'>"+element.children( "span.small-movie-title" )[0].innerText + "</span>";
+      	var button = "<button data-movie-id='"+movie_id"' class='button tooltip-button'>Make Current</button>";
+      	return title + button;
       },
       hide: {
         effect: "explode",

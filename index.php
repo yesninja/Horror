@@ -18,8 +18,9 @@
 			<div id="title"></div>
 			<span id="overview"></span>
 			<span id="release"></span>
-			<span id="language"></span>
+			<span id="runtime"></span>
 			<span id="imdb"></span>
+			<span id="language"></span>
 		</div>
 		<div id="actions">
 			<button id="skip_it" class="button">Skip Movie</button>

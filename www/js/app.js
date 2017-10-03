@@ -164,9 +164,9 @@ function displayMovieContainer(id, objects) {
 
 	var html = "";
 	for (var key in objects) {
-		var elem = "<div class='small-movie' data-movie-id='"+objects[key].id+"' title='"+objects[key].title+"'>";
+		var elem = "<div id='small-movie-"+objects[key].id+"' class='small-movie' data-movie-id='"+objects[key].id+"'>";
 		elem += "<img class='small-movie-poster' src='https://image.tmdb.org/t/p/w320/"+objects[key].poster_path+"'/>";
-		//elem += "<span class='small-movie-title'>"+objects[key].title+"</span>";
+		elem += "<span style='display-none;' class='small-movie-title'>"+objects[key].title+"</span>";
 		elem += "</div>";
 		html += elem;
 	}
@@ -174,10 +174,14 @@ function displayMovieContainer(id, objects) {
 	$("#"+id+ " span").html(html);
 
 	$( ".small-movie" ).tooltip({
+	  content: function() {
+      	var element = $( this );
+      	console.log(this);
+      },
       hide: {
         effect: "explode",
         delay: 250
       }
     });
-    
+
 }

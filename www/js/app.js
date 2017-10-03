@@ -42,6 +42,18 @@ $( document ).ready(function() {
 		});		  
 	});
 
+	$( "#store_it" ).on("click", function() {
+		var data = {
+			"c":"Movie",
+			"m":"getNextMovie",
+			"store":true
+		};
+		
+		$.post( app_url, data)
+		  .done(function( data ) {
+			displayMovie(data);
+		});		  
+	});
 
 	$( "#login_form" ).submit(function( event ) {
 	  	event.preventDefault();

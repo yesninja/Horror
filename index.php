@@ -23,9 +23,11 @@
 		</div>
 		<div id="actions">
 			<button id="skip_it" class="button">Skip Movie</button>
+			<button id="store_it" class="button">Store Movie</button>
 			<button id="watched_it" class="button">Watched Movie</button>
 		</div>
 
+		<div id="stored"></div>
 		<div id="watched"></div>
 		<div id="skipped"></div>
 	</div>

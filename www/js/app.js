@@ -187,7 +187,7 @@ function displayMovie(obj) {
     	count_html += "<div>Total Watched: "+obj.counts.watched+"</div>";
     	count_html += "<div>Total Stored: "+obj.counts.stored+"</div>";
     	count_html += "<div>Total Skipped: "+obj.counts.skipped+"</div>";
-    	count+html += "</div>";
+    	count_html += "</div>";
     	$("#watch_counts").html(count_html);
     }
     

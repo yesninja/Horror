@@ -179,7 +179,7 @@ function displayMovieContainer(id, objects) {
       	var element = $( this );
 	  	var movie_id = element.data("movie-id");
       	var title = "<span class='tooltip-title'>"+element.children( "span.small-movie-title" )[0].innerText + "</span>";
-      	var button = "<button data-movie-id='"+movie_id"' class='button tooltip-button'>Make Current</button>";
+      	var button = "<button data-movie-id='"+movie_id+"' class='button tooltip-button'>Make Current</button>";
       	return title + button;
       },
       hide: {

@@ -194,9 +194,9 @@ function addSmallMovieToContainer(obj) {
 
 
 function getSmallMovieHTML(obj) {
-	var elem = "<div id='small-movie-"+objects[key].id+"' class='small-movie' data-movie-id='"+objects[key].id+"'>";
-	elem += "<img class='small-movie-poster' src='https://image.tmdb.org/t/p/w320/"+objects[key].poster_path+"'/>";
-	elem += "<span style='display:none;' class='small-movie-title'>"+objects[key].title+"</span>";
+	var elem = "<div id='small-movie-"+obj.id+"' class='small-movie' data-movie-id='"+obj.id+"'>";
+	elem += "<img class='small-movie-poster' src='https://image.tmdb.org/t/p/w320/"+obj.poster_path+"'/>";
+	elem += "<span style='display:none;' class='small-movie-title'>"+obj.title+"</span>";
 	elem += "</div>";
 
 	return elem;

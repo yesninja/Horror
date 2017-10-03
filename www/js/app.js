@@ -26,8 +26,8 @@ $( document ).ready(function() {
 
 		$.post( app_url, data)
 		  .done(function( data ) {
+		  	addSmallMovieToContainer("watched",currentMovieData);
 		    displayMovie(data);
-		    addSmallMovieToContainer("watched",currentMovieData);
 		});
 	});
 
@@ -40,8 +40,8 @@ $( document ).ready(function() {
 		
 		$.post( app_url, data)
 		  .done(function( data ) {
+		  addSmallMovieToContainer("skipped",currentMovieData);
 			displayMovie(data);
-			addSmallMovieToContainer("skipped",currentMovieData);
 		});
 	});
 
@@ -54,8 +54,8 @@ $( document ).ready(function() {
 		
 		$.post( app_url, data)
 		  .done(function( data ) {
+		  addSmallMovieToContainer("stored",currentMovieData);
 			displayMovie(data);
-			addSmallMovieToContainer("stored",currentMovieData);
 		});
 	});
 
@@ -139,7 +139,7 @@ function displayMovie(obj) {
 		return;
 	}
 	currentMovieData = obj;
-	
+
 	$("#title").html(obj.title);
     $("#poster").attr("src","https://image.tmdb.org/t/p/w640/"+obj.poster_path);
     if (obj.trailer_link) {

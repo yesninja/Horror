@@ -45,15 +45,18 @@ button.button{
 	padding: 15px;
     margin: 55px;
 }
-
 #skip_it{
 	background-color:#868686;
 }
-
 #store_it{
     background-color:#d4681b;
 }
-
+.movie-container{
+    background-color:#f1f1f1;
+    width:100%;
+    margin:20px;
+    padding:10px;
+}
 /* Bordered form */
 form {
     border: 3px solid #f1f1f1;

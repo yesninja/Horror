@@ -27,9 +27,9 @@
 			<button id="watched_it" class="button">Watched Movie</button>
 		</div>
 
-		<div id="stored"></div>
-		<div id="watched"></div>
-		<div id="skipped"></div>
+		<div id="stored" class="movie-container"></div>
+		<div id="watched" class="movie-container"></div>
+		<div id="skipped" class="movie-container"></div>
 	</div>
 	<div id="footer">
 		<span>Horror Helper 2017</span>

@@ -96,10 +96,38 @@ $( document ).ready(function() {
 			return false;
 		});
 	});
+
+	// Get Movie Container Info
+	var storedData = {
+		"c":"Movie",
+		"m":"getStoredMovies"
+	};
+	$.post( app_url, storedData)
+	  .done(function( data ) {
+		displayMovieContainer("stored",data);
+	});
+
+	var watchedData = {
+		"c":"Movie",
+		"m":"getWatchedMovies"
+	};
+	$.post( app_url, watchedData)
+	  .done(function( data ) {
+		displayMovieContainer("watched",data);
+	});
+
+	var skippedData = {
+		"c":"Movie",
+		"m":"getSkippedMovies"
+	};
+	$.post( app_url, skippedData)
+	  .done(function( data ) {
+		displayMovieContainer("skipped",data);
+	});
+
 });
 
-function displayMovie(obj)
-{
+function displayMovie(obj) {
 	if (!obj)
 	{
 		window.location = "login.php";
@@ -130,4 +158,21 @@ function displayMovie(obj)
     $("#overview").html(obj.overview);
     $("#release").html("Released: "+obj.release_date);
     $("#language").html("Language: "+obj.language);
+}
+
+function displayMovieContainer(id, objects) {
+
+	if (!objects) return;
+
+	var html = "";
+	for (var key in objects) {
+		var elem = "";
+		var img = "<img width='240' src='https://image.tmdb.org/t/p/w320/"+objects[key].poster_path+"'/>";
+		var title = "<span>"+objects[key].title+"</span>";
+		elem = img + title;
+		
+		html += elem;
+	}
+
+	$("#"+id).html(html);
 }

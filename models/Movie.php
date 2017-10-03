@@ -151,46 +151,46 @@ class Movie
 
 	public static function getWatchedMovies(PDO $db, $user_id)
 	{
-		$mvoies = array();
+		$movies = array();
 
-		$stmt = $db->prepare("SELECT * FROM `watched_movies` WHERE `user_id` = ?");
+		$stmt = $db->prepare("SELECT `movies`.* FROM `watched_movies` LEFT JOIN `movies` on `movies`.`id` = `watched_movies`.`mdb_id` WHERE `user_id` = ?");
 		$stmt->execute(array($user_id));
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 		{
-			$mvoies[] = $row;
+			$movies[] = $row;
 		}
 
-		return $mvoies;
+		return $movies;
 	}
 
 	public static function getSkippedMovies(PDO $db, $user_id)
 	{
-		$mvoies = array();
+		$movies = array();
 
-		$stmt = $db->prepare("SELECT * FROM `skipped_movies` WHERE `user_id` = ?");
+		$stmt = $db->prepare("SELECT `movies`.* FROM `skipped_movies` LEFT JOIN `movies` on `movies`.`id` = `skipped_movies`.`mdb_id` WHERE `user_id` = ?");
 		$stmt->execute(array($user_id));
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 		{
-			$mvoies[] = $row;
+			$movies[] = $row;
 		}
 
-		return $mvoies;
+		return $movies;
 	}
 
 	public static function getStoredMovies(PDO $db, $user_id)
 	{
-		$mvoies = array();
+		$movies = array();
 
-		$stmt = $db->prepare("SELECT * FROM `stored_movies` WHERE `user_id` = ?");
+		$stmt = $db->prepare("SELECT `movies`.* FROM `stored_movies` LEFT JOIN `movies` on `movies`.`id` = `stored_movies`.`mdb_id` WHERE `user_id` = ?");
 		$stmt->execute(array($user_id));
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 		{
-			$mvoies[] = $row;
+			$movies[] = $row;
 		}
 
-		return $mvoies;
+		return $movies;
 	}
 }

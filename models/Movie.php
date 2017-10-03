@@ -153,7 +153,7 @@ class Movie
 	{
 		$movies = array();
 
-		$stmt = $db->prepare("SELECT `movies`.* FROM `watched_movies` LEFT JOIN `movies` on `movies`.`id` = `watched_movies`.`mdb_id` WHERE `user_id` = ?");
+		$stmt = $db->prepare("SELECT `movies`.* FROM `watched_movies` LEFT JOIN `movies` on `movies`.`id` = `watched_movies`.`mdb_id` WHERE `user_id` = ? ORDER BY `watched_movies`.`id` DESC");
 		$stmt->execute(array($user_id));
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
@@ -168,7 +168,7 @@ class Movie
 	{
 		$movies = array();
 
-		$stmt = $db->prepare("SELECT `movies`.* FROM `skipped_movies` LEFT JOIN `movies` on `movies`.`id` = `skipped_movies`.`mdb_id` WHERE `user_id` = ?");
+		$stmt = $db->prepare("SELECT `movies`.* FROM `skipped_movies` LEFT JOIN `movies` on `movies`.`id` = `skipped_movies`.`mdb_id` WHERE `user_id` = ? ORDER BY `skipped_movies`.`id` DESC");
 		$stmt->execute(array($user_id));
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
@@ -183,7 +183,7 @@ class Movie
 	{
 		$movies = array();
 
-		$stmt = $db->prepare("SELECT `movies`.* FROM `stored_movies` LEFT JOIN `movies` on `movies`.`id` = `stored_movies`.`mdb_id` WHERE `user_id` = ?");
+		$stmt = $db->prepare("SELECT `movies`.* FROM `stored_movies` LEFT JOIN `movies` on `movies`.`id` = `stored_movies`.`mdb_id` WHERE `user_id` = ? ORDER BY `stored_movies`.`id` DESC");
 		$stmt->execute(array($user_id));
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC))

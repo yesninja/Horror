@@ -26,7 +26,7 @@ $( document ).ready(function() {
 		$.post( app_url, data)
 		  .done(function( data ) {
 		    displayMovie(data);
-		    displayMovieContainer("watched",data);
+		    displayMovieContainer("watched",[data]);
 		});
 	});
 
@@ -40,7 +40,7 @@ $( document ).ready(function() {
 		$.post( app_url, data)
 		  .done(function( data ) {
 			displayMovie(data);
-			displayMovieContainer("skipped",data);
+			displayMovieContainer("skipped",[data]);
 		});
 	});
 
@@ -54,7 +54,7 @@ $( document ).ready(function() {
 		$.post( app_url, data)
 		  .done(function( data ) {
 			displayMovie(data);
-			displayMovieContainer("store",data);
+			displayMovieContainer("store",[data]);
 		});
 	});
 
@@ -159,7 +159,12 @@ function displayMovie(obj) {
 
     $("#overview").html(obj.overview);
     $("#release").html(obj.status": "+obj.release_date);
-    $("#runtime").html("Runtime: "+obj.runtime+"m");
+    if (obj.runtime) {
+    	$("#runtime").html("Runtime: "+obj.runtime+"m");
+    } else {
+    	$("#runtime").html("Runtime: N/A");
+    }
+
     $("#language").html("Language: "+obj.language);
 }
 
@@ -168,11 +173,12 @@ function displayMovieContainer(id, objects) {
 	if (!objects) return;
 
 	for (var key in objects) {
+		if (!objects[key].id) continue;
+
 		var elem = "<div id='small-movie-"+objects[key].id+"' class='small-movie' data-movie-id='"+objects[key].id+"'>";
 		elem += "<img class='small-movie-poster' src='https://image.tmdb.org/t/p/w320/"+objects[key].poster_path+"'/>";
 		elem += "<span style='display:none;' class='small-movie-title'>"+objects[key].title+"</span>";
 		elem += "</div>";
-		html += elem;
 		$("#"+id).append(elem);
 
 		$( "#small-movie-"+objects[key].id ).tooltip({

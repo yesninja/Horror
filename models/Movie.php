@@ -97,10 +97,10 @@ class Movie
 		}
 
 		$count_total   = Movie::getTotalCount($db,"movies");
-		$count_query   = Movie::getTotalCount($db,"movies", $where, $values);
-		$count_watched = Movie::getTotalCount($db,"watched", " WHERE `user_id` = ?", array($user_id));
-		$count_skipped = Movie::getTotalCount($db,"skipped", " WHERE `user_id` = ?", array($user_id));
-		$count_stored  = Movie::getTotalCount($db,"stored", " WHERE `user_id` = ?", array($user_id));
+		$count_query   = Movie::getTotalCount($db,"movies", $join.$where, $values);
+		$count_watched = Movie::getTotalCount($db,"watched_movies", " WHERE `user_id` = ?", array($user_id));
+		$count_skipped = Movie::getTotalCount($db,"skipped_movies", " WHERE `user_id` = ?", array($user_id));
+		$count_stored  = Movie::getTotalCount($db,"stored_movies", " WHERE `user_id` = ?", array($user_id));
 		
 		$query = "SELECT `movies`.* FROM `movies` ".$join." ".$where." ORDER BY RAND() LIMIT 1";
 		$stmt = $db->prepare($query);
@@ -111,11 +111,12 @@ class Movie
 		if ($row)
 		{
 			self::setCurrent($db, $user_id, $row["id"]);
-			$row["count_query"]   = $count_query;
-			$row["count_total"]   = $count_total;
-			$row["count_watched"] = $count_watched;
-			$row["count_skipped"] = $count_skipped;
-			$row["count_stored"]  = $count_stored;
+			$row["counts"]["total"]   = $count_total;
+			$row["counts"]["query"]   = $count_query;
+			$row["counts"]["watched"] = $count_watched;
+			$row["counts"]["skipped"] = $count_skipped;
+			$row["counts"]["stored"]  = $count_stored;
+			$row["conditions"]        = $conditions;
 			return $row;
 		}
 
@@ -224,7 +225,7 @@ class Movie
 
 	public static function getTotalCount(PDO $db, $table, $where=false, $values=array())
 	{
-		$count_stmt = $db->prepare("SELECT COUNT(`id`) as `count` FROM `".$table."` ".$where);
+		$count_stmt = $db->prepare("SELECT COUNT(*) as `count` FROM `".$table."` ".$where);
 		$count_stmt->execute($values);
 		$count_row = $count_stmt->fetch(PDO::FETCH_ASSOC);
 

@@ -13,6 +13,7 @@
 		<div id="image"><img style="max-width: 100%;" id ="poster" src=""/></div>
 		<div id="tools">
 			<span id="trailer"></span>
+			<div id="search_conditions"></div>
 			<div id="watch_counts"></div>
 		</div>
 		<div id="desc">

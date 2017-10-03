@@ -52,10 +52,26 @@ button.button{
     background-color:#d4681b;
 }
 .movie-container{
+    clear: both;
     background-color:#f1f1f1;
     width:100%;
     margin:20px;
     padding:10px;
+    float: left;
+}
+.small-movie{
+    width: 250px;
+    float:left;
+}
+.small-movie-title{
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+    font-weight: bold;
+    display: inline-block;
+}
+.small-movie-poster{
+
 }
 /* Bordered form */
 form {

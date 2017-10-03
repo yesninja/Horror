@@ -128,8 +128,7 @@ $( document ).ready(function() {
 });
 
 function displayMovie(obj) {
-	if (!obj)
-	{
+	if (!obj) {
 		window.location = "login.php";
 		return;
 	}
@@ -146,8 +145,7 @@ function displayMovie(obj) {
     	{
     		 imdb_html = "IMDB: <a href='http://www.imdb.com/title/"+obj.imdb_id+"' target='_blank'>"+obj.imdb_rating+"</a>";
     	}
-    	else
-    	{
+    	else {
     		imdb_html = "IMDB: "+obj.imdb_rating;
     	}
 
@@ -166,13 +164,12 @@ function displayMovieContainer(id, objects) {
 
 	var html = "";
 	for (var key in objects) {
-		var elem = "";
-		var img = "<img width='240' src='https://image.tmdb.org/t/p/w320/"+objects[key].poster_path+"'/>";
-		var title = "<span>"+objects[key].title+"</span>";
-		elem = img + title;
-		
+		var elem = "<div class='small-movie' data-movie-id='"+objects[key].id+"'>";
+		elem += "<img class='small-movie-poster' width='240' src='https://image.tmdb.org/t/p/w320/"+objects[key].poster_path+"'/>";
+		elem += "<span class='small-movie-title'>"+objects[key].title+"</span>";
+		elem += "</div>";
 		html += elem;
 	}
 
-	$("#"+id).html(html);
+	$("#"+id+ " span").html(html);
 }

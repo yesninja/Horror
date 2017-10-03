@@ -72,6 +72,18 @@ class MovieController extends Controller
 		$this->response = $movies;
 	}
 
+	public function getStoredMovies()
+	{
+		$data = Request::get();
+		
+		$user = User::get($this->db,Session::get("user_id"));
+		if (!$user) return false;
+
+		$movies = Movie::getStoredMovies($this->db, $user->id);
+
+		$this->response = $movies;
+	}
+
 	public function makeCurrent()
 	{
 		$data = Request::get();

@@ -1,4 +1,5 @@
 var app_url = "app.php";
+var currentMovieData = "";
 
 $( document ).ready(function() {
 	
@@ -26,7 +27,7 @@ $( document ).ready(function() {
 		$.post( app_url, data)
 		  .done(function( data ) {
 		    displayMovie(data);
-		    addSmallMovieToContainer("watched",data);
+		    addSmallMovieToContainer("watched",currentMovieData);
 		});
 	});
 
@@ -40,7 +41,7 @@ $( document ).ready(function() {
 		$.post( app_url, data)
 		  .done(function( data ) {
 			displayMovie(data);
-			addSmallMovieToContainer("skipped",data);
+			addSmallMovieToContainer("skipped",currentMovieData);
 		});
 	});
 
@@ -54,7 +55,7 @@ $( document ).ready(function() {
 		$.post( app_url, data)
 		  .done(function( data ) {
 			displayMovie(data);
-			addSmallMovieToContainer("store",data);
+			addSmallMovieToContainer("stored",currentMovieData);
 		});
 	});
 
@@ -137,6 +138,8 @@ function displayMovie(obj) {
 		window.location = "login.php";
 		return;
 	}
+	currentMovieData = obj;
+	
 	$("#title").html(obj.title);
     $("#poster").attr("src","https://image.tmdb.org/t/p/w640/"+obj.poster_path);
     if (obj.trailer_link) {
@@ -181,7 +184,7 @@ function displayMovieContainer(id, objects) {
 	}
 
 	$("#"+id+" span").append(html);
-	addToolTip("small-movie");
+	addToolTip(id);
 }
 
 function addSmallMovieToContainer(id,obj) {

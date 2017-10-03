@@ -177,15 +177,43 @@ function displayMovieContainer(id, objects) {
 	  items: "[data-movie-id]",
 	  content: function() {
       	var element = $( this );
-	  	var movie_id = element.data("movie-id");
+	  		var movie_id = element.data("movie-id");
       	var title = "<span class='tooltip-title'>"+element.children( "span.small-movie-title" )[0].innerText + "</span>";
       	var button = "<button data-movie-id='"+movie_id+"' class='button tooltip-button'>Make Current</button>";
       	return title + button;
       },
       hide: {
-        effect: "explode",
+        effect: "bounce",
         delay: 250
-      }
+      },
+			open: function(event, ui)
+	    {
+	        if (typeof(event.originalEvent) === 'undefined')
+	        {
+	            return false;
+	        }
+	        
+	        var $id = $(ui.tooltip).attr('id');
+	        
+	        // close any lingering tooltips
+	        $('div.ui-tooltip').not('#' + $id).remove();
+	        
+	        // ajax function to pull in data and add it to the tooltip goes here
+	    },
+	    close: function(event, ui)
+	    {
+	        ui.tooltip.hover(function()
+	        {
+	            $(this).stop(true).fadeTo(400, 1); 
+	        },
+	        function()
+	        {
+	            $(this).fadeOut('400', function()
+	            {
+	                $(this).remove();
+	            });
+	        });
+		    }
     });
 
 }

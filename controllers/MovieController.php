@@ -95,6 +95,8 @@ class MovieController extends Controller
 
 		$id = $data["id"];
 
+		// When making a movie current skip the current one
+		Movie::skip($this->db,$user->id);
 		Movie::setCurrent($this->db,$user->id,$id);
 		$movie = Movie::get($this->db,$user->id,$id);
 

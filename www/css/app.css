@@ -54,15 +54,20 @@ button.button{
 .movie-container{
     clear: both;
     background-color:#f1f1f1;
-    width: 95%;
+    width: 97%;
     padding:20px;
     float: left;
-    margin:30px;
+    margin:30px 0 30px 30px;
 }
 .movie-container h2{
     text-align: center;
     width: 100%;
     color: white;
+    margin: 0px 0 30px;
+}
+button.button.tooltip-button{
+    padding: 14px 20px;
+    margin: 8px 0;
 }
 #stored.movie-container{
     background-color: #d4681b;

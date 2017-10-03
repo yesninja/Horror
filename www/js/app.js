@@ -179,7 +179,7 @@ function displayMovieContainer(id, objects) {
 		elem += "<img class='small-movie-poster' src='https://image.tmdb.org/t/p/w320/"+objects[key].poster_path+"'/>";
 		elem += "<span style='display:none;' class='small-movie-title'>"+objects[key].title+"</span>";
 		elem += "</div>";
-		$("#"+id).append(elem);
+		$("#"+id "span").prepend(elem);
 
 		$( "#small-movie-"+objects[key].id ).tooltip({
 		  items: "[data-movie-id]",

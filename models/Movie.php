@@ -152,9 +152,9 @@ class Movie
 	public static function getWatchedMovies(PDO $db, $user_id)
 	{
 		$mvoies = array();
-		$cur = Movie::getCurrent($db, $user_id);
+
 		$stmt = $db->prepare("SELECT * FROM `watched_movies` WHERE `user_id` = ?");
-		$stmt->execute(array($cur["id"],$user_id));
+		$stmt->execute(array($user_id));
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 		{
@@ -167,9 +167,9 @@ class Movie
 	public static function getSkippedMovies(PDO $db, $user_id)
 	{
 		$mvoies = array();
-		$cur = Movie::getCurrent($db, $user_id);
+
 		$stmt = $db->prepare("SELECT * FROM `skipped_movies` WHERE `user_id` = ?");
-		$stmt->execute(array($cur["id"],$user_id));
+		$stmt->execute(array($user_id));
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 		{
@@ -182,9 +182,9 @@ class Movie
 	public static function getStoredMovies(PDO $db, $user_id)
 	{
 		$mvoies = array();
-		$cur = Movie::getCurrent($db, $user_id);
+
 		$stmt = $db->prepare("SELECT * FROM `stored_movies` WHERE `user_id` = ?");
-		$stmt->execute(array($cur["id"],$user_id));
+		$stmt->execute(array($user_id));
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 		{

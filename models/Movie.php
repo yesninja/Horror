@@ -28,6 +28,7 @@ class Movie
 			$conditions = array(
 				"skip_watched" => true,
 				"skip_skipped" => true,
+				"skip_stored" => true,
 				array("imdb_rating",">","5.0"),
 			);
 		}
@@ -46,7 +47,11 @@ class Movie
 			else if ($cond == "skip_skipped" && $value)
 			{
 				$skipSkippedMovies = true;
-			} 
+			}
+			else if ($cond == "skip_stored" && $value)
+			{
+				$skipStoredMovies = true;
+			}
 		}
 
 		// Remove results
@@ -74,11 +79,29 @@ class Movie
 			$values[] = $user_id;
 		}
 
+		if ($skipStoredMovies)
+		{
+			$join .= " LEFT JOIN `stored_movies`
+						ON 
+							`movies`.`mdb_id`=`stored_movies`.`mdb_id`
+						AND 
+							`stored_movies`.`user_id`=?
+			";
+			$where .= " AND `stored_movies`.`id` IS NULL";
+			$values[] = $user_id;
+		}
+
 		foreach($whereValues as $vals)
 		{
 			$values[] = $vals;
 		}
 
+		$count_total   = Movie::getTotalCount($db,"movies");
+		$count_query   = Movie::getTotalCount($db,"movies", $where, $values);
+		$count_watched = Movie::getTotalCount($db,"watched", " WHERE `user_id` = ?", array($user_id));
+		$count_skipped = Movie::getTotalCount($db,"skipped", " WHERE `user_id` = ?", array($user_id));
+		$count_stored  = Movie::getTotalCount($db,"stored", " WHERE `user_id` = ?", array($user_id));
+		
 		$query = "SELECT `movies`.* FROM `movies` ".$join." ".$where." ORDER BY RAND() LIMIT 1";
 		$stmt = $db->prepare($query);
 		$stmt->execute($values);
@@ -88,6 +111,11 @@ class Movie
 		if ($row)
 		{
 			self::setCurrent($db, $user_id, $row["id"]);
+			$row["count_query"]   = $count_query;
+			$row["count_total"]   = $count_total;
+			$row["count_watched"] = $count_watched;
+			$row["count_skipped"] = $count_skipped;
+			$row["count_stored"]  = $count_stored;
 			return $row;
 		}
 
@@ -192,5 +220,14 @@ class Movie
 		}
 
 		return $movies;
+	}
+
+	public static function getTotalCount(PDO $db, $table, $where=false, $values=array())
+	{
+		$count_stmt = $db->prepare("SELECT COUNT(`id`) as `count` FROM `".$table."` ".$where);
+		$count_stmt->execute($values);
+		$count_row = $count_stmt->fetch(PDO::FETCH_ASSOC);
+
+		return $count_row["count"];
 	}
 }

@@ -24,12 +24,12 @@
 			<span id="imdb"></span>
 			<span id="language"></span>
 		</div>
+		<div id="movie_links"><span class="movie-links-container"></span></div>
 		<div id="actions">
 			<button id="skip_it" class="button">Skip Movie</button>
 			<button id="store_it" class="button">Store Movie</button>
 			<button id="watched_it" class="button">Watched Movie</button>
 		</div>
-
 		<div id="stored" class="movie-container"><h2>Stored Movies</h2><span class='holder'></span></div>
 		<div id="watched" class="movie-container"><h2>Watched Movies</h2><span class='holder'></span></div>
 		<div id="skipped" class="movie-container"><h2>Skipped Movies</h2><span class='holder'></span></div>

@@ -140,6 +140,18 @@ function displayMovie(obj) {
 	}
 	currentMovieData = obj;
 
+	// Go get movie links...
+	var movieLinkData = {
+		"c":"Movie",
+		"m":"getMovieLinks",
+		"title":obj.title
+	};
+
+	$.post( app_url, movieLinkData)
+	  .done(function( data ) {
+		displayMovieLinks(data);
+	});
+
 	$("#title").html(obj.title);
 	if (obj.poster_path) {
   	$("#poster").attr("src","https://image.tmdb.org/t/p/w640/"+obj.poster_path);
@@ -211,6 +223,32 @@ function displayMovieContainer(id, objects) {
 
 	$("#"+id+" span.holder").append(html);
 	addToolTip(id);
+}
+
+function displayMovieLinks(objexts) {
+
+	var html = "No Links Found";
+
+	if (objexts)
+	{
+		for (var key in objexts) {
+			var elem = "";
+			var link = "#";
+			var price = "";
+			if (objects.link) {
+				link = objects.link;
+			}
+
+			if (objects.price) {
+				price = objects.price;
+			}
+
+			elem = "<div class='movie-link'><a href='"+link+"'><img src='http://cdn.flixfindr.com/static/img/sources-"+objects.source+"-white.svg'/><span class='movie-link-price'>"+price+"</span></a></div>";
+			html += elem;
+		}
+	}
+
+	$("#movie_links span.movie-links-container").html(html);
 }
 
 function addSmallMovieToContainer(id,obj) {

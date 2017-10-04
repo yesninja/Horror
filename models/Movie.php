@@ -247,7 +247,7 @@ class Movie
 			"order_by"=> array()
 		);
 
-		$get = "page=1&q=".encode(json_encode($json)); 
+		$get = "page=1&q=".urlencode(json_encode($json)); 
 
 		// create curl resource 
 		$ch = curl_init();
@@ -268,7 +268,7 @@ class Movie
 					{
 						if ($obj["availabilities"])
 						{
-							$movie_links = $json[$key]["availabilities"];						
+							$movie_links = $obj["availabilities"];						
 						}
 						break;
 					}

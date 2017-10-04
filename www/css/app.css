@@ -31,15 +31,19 @@
     margin: 10px 20px;
     font-size: 15pt;
 }
-#release, #imdb, #language{
+#release, #imdb, #language, #runtime{
 	display: inline-block;
-    padding: 20px;
-    margin: 10px 20px;
+    padding: 0 20px;
+    margin: 5px 20px;
 }
 #actions{
 	width: 32%;
     float: left;
     text-align: center;
+}
+#movie_links{
+    width: 32%;
+    float: left;
 }
 #footer{
 	clear:both;
@@ -49,7 +53,7 @@
 button.button{
 	padding: 15px;
     margin: 55px 0px 0px 55px;
-    
+
 }
 #skip_it{
 	background-color:#868686;

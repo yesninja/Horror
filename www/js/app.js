@@ -232,18 +232,19 @@ function displayMovieLinks(objects) {
 	if (objects && typeof objects === "object")
 	{
 		for (var key in objects) {
+			var object = objects[key];
 			var elem = "";
 			var link = "#";
 			var price = "";
-			if (objects.link) {
-				link = objects.link;
+			if (object.link) {
+				link = object.link;
 			}
 
-			if (objects.price) {
-				price = objects.price;
+			if (object.price) {
+				price = object.price;
 			}
 
-			elem = "<div class='movie-link'><a href='"+link+"'><img src='http://cdn.flixfindr.com/static/img/sources-"+objects.source+"-white.svg'/><span class='movie-link-price'>"+price+"</span></a></div>";
+			elem = "<div class='movie-link'><a href='"+link+"'><img src='http://cdn.flixfindr.com/static/img/sources-"+object.source+"-white.svg'/><span class='movie-link-price'>"+price+"</span></a></div>";
 			html += elem;
 		}
 	}

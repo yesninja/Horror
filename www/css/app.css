@@ -49,11 +49,9 @@
 	clear:both;
 	text-align:center;
 }
-
 button.button{
 	padding: 15px;
-    margin: 55px 0px 0px 55px;
-
+    margin: 15px 0px 20px 15px;
 }
 #skip_it{
 	background-color:#868686;
@@ -106,7 +104,7 @@ button.button.tooltip-button{
 }
 .movie-links-container{
     float:left;
-    margin:40px;
+    margin: 10px 0 10px 40px;
 }
 .movie-links-container .movie-link{
     margin:0 20px 0 0;

@@ -241,7 +241,7 @@ function displayMovieLinks(objects) {
 			{
 				continue;
 			}
-			
+
 			// only one of each source for now
 			sources.push(object.source);
 			if (object.link) {
@@ -257,8 +257,7 @@ function displayMovieLinks(objects) {
 			html += elem;
 		}
 	}
-	else
-	{
+	if (!html) {
 		html = "No Movie Links Found";
 	}
 

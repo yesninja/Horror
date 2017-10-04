@@ -217,7 +217,7 @@ function addSmallMovieToContainer(id,obj) {
 	if (!obj.id) return;
 
 	var elem = getSmallMovieHTML(obj);
-	$("#"+id+" span").prepend(elem);
+	$("#"+id+" span:first-child").prepend(elem);
 	addToolTip("small-movie-"+obj.id);
 }
 

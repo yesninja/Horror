@@ -228,7 +228,7 @@ function displayMovieContainer(id, objects) {
 function displayMovieLinks(objects) {
 
 	var html = "No Links Found";
-
+	console.log(objects);
 	if (objects && typeof objects === "object")
 	{
 		for (var key in objects) {

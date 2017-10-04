@@ -143,7 +143,7 @@ function displayMovie(obj) {
 	$("#title").html(obj.title);
 	if (obj.poster_path) {
   	$("#poster").attr("src","https://image.tmdb.org/t/p/w640/"+obj.poster_path);
-  else {
+  } else {
   	$("#poster").attr("src","www/images/no-image-640.png");
   }
   if (obj.trailer_link) {

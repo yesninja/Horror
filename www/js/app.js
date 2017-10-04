@@ -237,7 +237,7 @@ function displayMovieLinks(objects) {
 			var elem = "";
 			var link = "#";
 			var price = "";
-			if ($.inArray(object.source, sources))
+			if (sources.indexOf(object.source) > -1)
 			{
 				continue;
 			}

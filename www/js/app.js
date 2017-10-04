@@ -225,13 +225,13 @@ function displayMovieContainer(id, objects) {
 	addToolTip(id);
 }
 
-function displayMovieLinks(objexts) {
+function displayMovieLinks(objects) {
 
 	var html = "No Links Found";
 
-	if (objexts)
+	if (objects && typeof objects === "object")
 	{
-		for (var key in objexts) {
+		for (var key in objects) {
 			var elem = "";
 			var link = "#";
 			var price = "";

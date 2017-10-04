@@ -141,55 +141,59 @@ function displayMovie(obj) {
 	currentMovieData = obj;
 
 	$("#title").html(obj.title);
-    $("#poster").attr("src","https://image.tmdb.org/t/p/w640/"+obj.poster_path);
-    if (obj.trailer_link) {
-    	$("#trailer").html("<iframe width='420' height='315' src='https://www.youtube.com/embed/"+obj.trailer_link+"'></iframe>");
-    } else {
-    	$("#trailer").html("Couldn't find trailer :(");
-    }
-    if (obj.imdb_rating || obj.imdb_id) {
-    	var imdb_html = obj.imdb_rating;
-    	if (obj.imdb_id) {
-    		 imdb_html = "IMDB: <a href='http://www.imdb.com/title/"+obj.imdb_id+"' target='_blank'>"+obj.imdb_rating+"</a>";
-    	}	else {
-    		imdb_html = "IMDB: "+obj.imdb_rating;
-    	}
+	if (obj.poster_path) {
+  	$("#poster").attr("src","https://image.tmdb.org/t/p/w640/"+obj.poster_path);
+  else {
+  	$("#poster").attr("src","www/images/no-image-640.png");
+  }
+  if (obj.trailer_link) {
+  	$("#trailer").html("<iframe width='420' height='315' src='https://www.youtube.com/embed/"+obj.trailer_link+"'></iframe>");
+  } else {
+  	$("#trailer").html("Couldn't find trailer :(");
+  }
+  if (obj.imdb_rating || obj.imdb_id) {
+  	var imdb_html = obj.imdb_rating;
+  	if (obj.imdb_id) {
+  		 imdb_html = "IMDB: <a href='http://www.imdb.com/title/"+obj.imdb_id+"' target='_blank'>"+obj.imdb_rating+"</a>";
+  	}	else {
+  		imdb_html = "IMDB: "+obj.imdb_rating;
+  	}
 
-    	$("#imdb").html(imdb_html);
-    } else {
-    	$("#imdb").html("No IMDB data :(");
-    }
+  	$("#imdb").html(imdb_html);
+  } else {
+  	$("#imdb").html("No IMDB data :(");
+  }
 
-    $("#overview").html(obj.overview);
-    $("#release").html(obj.status+": "+obj.release_date);
-    if (obj.runtime) {
-    	$("#runtime").html("Runtime: "+obj.runtime+"m");
-    } else {
-    	$("#runtime").html("Runtime: N/A");
-    }
+  $("#overview").html(obj.overview);
+  $("#release").html(obj.status+": "+obj.release_date);
+  if (obj.runtime) {
+  	$("#runtime").html("Runtime: "+obj.runtime+"m");
+  } else {
+  	$("#runtime").html("Runtime: N/A");
+  }
 
-    $("#language").html("Language: "+obj.language);
+  $("#language").html("Language: "+obj.language);
 
-    if (obj.conditions) {
-    	var search_html = "<div>Search Query: ";
-    	for (var key in obj.conditions) {
-    		if (typeof obj.conditions[key] === 'object') {
-    			search_html += "<span>"+obj.conditions[key][0]+" "+obj.conditions[key][1]+" "+obj.conditions[key][2]+"<span>";
-    		}
-    	}
-    	search_html += "</div>";
-    	$("#search_conditions").html(search_html);
-    }
+  if (obj.conditions) {
+  	var search_html = "<div>Search Query: ";
+  	for (var key in obj.conditions) {
+  		if (typeof obj.conditions[key] === 'object') {
+  			search_html += "<span>"+obj.conditions[key][0]+" "+obj.conditions[key][1]+" "+obj.conditions[key][2]+"<span>";
+  		}
+  	}
+  	search_html += "</div>";
+  	$("#search_conditions").html(search_html);
+  }
 
-    if (obj.counts) {
-    	var count_html = "<div id='counts'>";
-    	count_html += "<div>Total Movies: "+obj.counts.query+" / "+obj.counts.total+"  </div>";
-    	count_html += "<div>Total Watched: "+obj.counts.watched+"</div>";
-    	count_html += "<div>Total Stored: "+obj.counts.stored+"</div>";
-    	count_html += "<div>Total Skipped: "+obj.counts.skipped+"</div>";
-    	count_html += "</div>";
-    	$("#watch_counts").html(count_html);
-    }
+  if (obj.counts) {
+  	var count_html = "<div id='counts'>";
+  	count_html += "<div>Total Movies: "+obj.counts.query+" / "+obj.counts.total+"  </div>";
+  	count_html += "<div>Total Watched: "+obj.counts.watched+"</div>";
+  	count_html += "<div>Total Stored: "+obj.counts.stored+"</div>";
+  	count_html += "<div>Total Skipped: "+obj.counts.skipped+"</div>";
+  	count_html += "</div>";
+  	$("#watch_counts").html(count_html);
+  }
     
 }
 
@@ -220,7 +224,11 @@ function addSmallMovieToContainer(id,obj) {
 
 function getSmallMovieHTML(obj) {
 	var elem = "<div id='small-movie-"+obj.id+"' class='small-movie' data-movie-id='"+obj.id+"'>";
-	elem += "<img class='small-movie-poster' src='https://image.tmdb.org/t/p/w320/"+obj.poster_path+"'/>";
+	if (obj.poster_path) {
+		elem += "<img class='small-movie-poster' src='https://image.tmdb.org/t/p/w320/"+obj.poster_path+"'/>";
+  } else {
+  	elem += "<img class='small-movie-poster' src='www/images/no-image-300.png'/>";
+  }
 	elem += "<span style='display:none;' class='small-movie-title'>"+obj.title+"</span>";
 	elem += "</div>";
 

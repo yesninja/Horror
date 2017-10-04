@@ -227,7 +227,7 @@ function displayMovieContainer(id, objects) {
 
 function displayMovieLinks(objects) {
 
-	var html = "No Links Found";
+	var html = "";
 	console.log(objects);
 	if (objects && typeof objects === "object")
 	{
@@ -244,9 +244,13 @@ function displayMovieLinks(objects) {
 				price = object.price;
 			}
 
-			elem = "<div class='movie-link'><a href='"+link+"'><img src='http://cdn.flixfindr.com/static/img/sources-"+object.source+"-white.svg'/><span class='movie-link-price'>"+price+"</span></a></div>";
+			elem = "<div class='movie-link'><a href='"+link+"'><img src='http://cdn.flixfindr.com/static/img/sources-"+object.source+"-white.svg'/><span>"+price+"</span></a></div>";
 			html += elem;
 		}
+	}
+	else
+	{
+		html = "No Movie Links Found";
 	}
 
 	$("#movie_links span.movie-links-container").html(html);

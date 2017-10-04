@@ -104,7 +104,27 @@ button.button.tooltip-button{
     width: 220px;
     height: 300px;
 }
+.movie-links-container{
+    margin:40px;
+}
+.movie-links-container .movie-link{
+    float:left;
+}
+.movie-links-container .movie-link a{
+    border-radius: 25px;
+    padding: 5px;
+    color: #FFFFFF;
+    background-color: #008CBA;
+    font-weight: bold;
+}
+.movie-links-container .movie-link img{
+    width: 50px;
+    margin-top: -10px;
+    margin: 5px 10px 10px 10px;
+}
+.movie-links-container .movie-link span{
 
+}
 
 
 /* Login/Register forms */

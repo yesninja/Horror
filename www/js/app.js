@@ -228,6 +228,7 @@ function displayMovieContainer(id, objects) {
 function displayMovieLinks(objects) {
 
 	var html = "";
+	var sources = [];
 	console.log(objects);
 	if (objects && typeof objects === "object")
 	{
@@ -236,15 +237,23 @@ function displayMovieLinks(objects) {
 			var elem = "";
 			var link = "#";
 			var price = "";
+			if ($.inArray(object.source, sources))
+			{
+				continue;
+			}
+			
+			// only one of each source for now
+			sources.push(object.source);
 			if (object.link) {
 				link = object.link;
 			}
 
 			if (object.price) {
-				price = object.price;
+				// disabled for now as it isn't accurate
+				//price = object.price;
 			}
 
-			elem = "<div class='movie-link'><a href='"+link+"'><img src='http://cdn.flixfindr.com/static/img/sources-"+object.source+"-white.svg'/><span>"+price+"</span></a></div>";
+			elem = "<div class='movie-link'><a target='_blank' href='"+link+"'><img src='http://cdn.flixfindr.com/static/img/sources-"+object.source+"-white.svg'/><span>"+price+"</span></a></div>";
 			html += elem;
 		}
 	}

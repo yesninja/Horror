@@ -105,20 +105,21 @@ button.button.tooltip-button{
     height: 300px;
 }
 .movie-links-container{
+    float:left;
     margin:40px;
 }
 .movie-links-container .movie-link{
+    margin:0 20px 0 0;
     float:left;
 }
 .movie-links-container .movie-link a{
-    border-radius: 25px;
-    padding: 5px;
+    padding: 10px;
     color: #FFFFFF;
     background-color: #008CBA;
     font-weight: bold;
 }
 .movie-links-container .movie-link img{
-    width: 50px;
+    width: 70px;
     margin-top: -10px;
     margin: 5px 10px 10px 10px;
 }

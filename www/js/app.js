@@ -209,7 +209,7 @@ function displayMovieContainer(id, objects) {
 		 html += elem;
 	}
 
-	$("#"+id+" span").append(html);
+	$("#"+id+" span.holder").append(html);
 	addToolTip(id);
 }
 
@@ -217,7 +217,7 @@ function addSmallMovieToContainer(id,obj) {
 	if (!obj.id) return;
 
 	var elem = getSmallMovieHTML(obj);
-	$("#"+id+" span:first-child").prepend(elem);
+	$("#"+id+" span.holder").prepend(elem);
 	addToolTip("small-movie-"+obj.id);
 }
 

@@ -154,7 +154,13 @@ function displayMovie(obj) {
 
 	$("#title").html(obj.title);
 	if (obj.poster_path) {
-  	$("#poster").attr("src","https://image.tmdb.org/t/p/w640/"+obj.poster_path);
+ 		$("#poster_loading").show();
+		var curImg = new Image();
+		curImg.src = "https://image.tmdb.org/t/p/w640/"+obj.poster_path;
+	  curImg.onload = function() {
+	  	$("#poster_loading").hide();
+	  	$("#poster").attr("src",curImg.src);
+		}
   } else {
   	$("#poster").attr("src","www/images/no-image-640.png");
   }

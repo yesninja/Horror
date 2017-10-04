@@ -10,7 +10,7 @@
 
 <body>
 	<div id="content">
-		<div id="image"><img style="max-width: 100%;" id ="poster" src=""/></div>
+		<div id="image"><img id="poster_loading" src="www/images/loading.gif"><span><img style="max-width: 100%;" id ="poster" src=""/></div>
 		<div id="tools">
 			<span id="trailer"></span>
 			<div id="search_conditions"></div>

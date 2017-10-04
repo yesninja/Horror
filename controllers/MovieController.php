@@ -102,4 +102,20 @@ class MovieController extends Controller
 
 		$this->response = $movie;
 	}
+
+	public function getMovieLinks()
+	{
+		$data = Request::get();
+		
+		$user = User::get($this->db, Session::get("user_id"));
+		if (!$user) return false;
+
+		if (!$data["title"]) return false;
+
+		$title = $data["title"];
+
+		$movie_links = Movie::getMovieLinks($title);
+
+		$this->response = $movie_links;
+	}
 }

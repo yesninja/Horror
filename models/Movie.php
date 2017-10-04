@@ -2,6 +2,8 @@
 
 class Movie
 {
+	const FLIX_FINDR_URL = "http://www.flixfindr.com/api/movie";
+
 	public static function get(PDO $db, $id)
 	{
 		$stmt = $db->prepare("SELECT * FROM `movies` WHERE `id` = ?");
@@ -230,5 +232,50 @@ class Movie
 		$count_row = $count_stmt->fetch(PDO::FETCH_ASSOC);
 
 		return $count_row["count"];
+	}
+
+	public function getMovieLinks($title)
+	{
+		$movie_links = array();
+
+		$json = array(
+			"filters" => array(array(
+				"name" => "title",
+				"op" => "ilike",
+				"val" => $title ."%"
+			)),
+			"order_by"=> array()
+		);
+
+		$get = "page=1&q=".encode(json_encode($json)); 
+
+		// create curl resource 
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, self::FLIX_FINDR_URL."?".$get); 
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+		$output = curl_exec($ch); 
+		curl_close($ch);
+
+		$json = json_decode($output,true);
+
+		if ($json)
+		{
+			if ($json["num_results"] > 0)
+			{
+				foreach($json["objects"] as $key=>$obj)
+				{
+					if (strtolower($obj["title"]) == strtolower($title))
+					{
+						if ($obj["availabilities"])
+						{
+							$movie_links = $json[$key]["availabilities"];						
+						}
+						break;
+					}
+				}
+			}
+		}
+
+		return $movie_links;
 	}
 }

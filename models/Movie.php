@@ -59,7 +59,7 @@ class Movie
 		{
 			$join .= " LEFT JOIN `watched_movies` 
 						ON 
-							`movies`.`mdb_id`=`watched_movies`.`mdb_id`
+							`movies`.`id`=`watched_movies`.`mdb_id`
 						AND 
 							`watched_movies`.`user_id`=?
 			";
@@ -71,7 +71,7 @@ class Movie
 		{
 			$join .= " LEFT JOIN `skipped_movies`
 						ON 
-							`movies`.`mdb_id`=`skipped_movies`.`mdb_id`
+							`movies`.`id`=`skipped_movies`.`mdb_id`
 						AND 
 							`skipped_movies`.`user_id`=?
 			";
@@ -83,7 +83,7 @@ class Movie
 		{
 			$join .= " LEFT JOIN `stored_movies`
 						ON 
-							`movies`.`mdb_id`=`stored_movies`.`mdb_id`
+							`movies`.`id`=`stored_movies`.`mdb_id`
 						AND 
 							`stored_movies`.`user_id`=?
 			";

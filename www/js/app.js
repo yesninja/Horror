@@ -229,7 +229,6 @@ function displayMovieLinks(objects) {
 
 	var html = "";
 	var sources = [];
-	console.log(objects);
 	if (objects && typeof objects === "object")
 	{
 		for (var key in objects) {

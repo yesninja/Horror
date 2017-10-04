@@ -30,6 +30,7 @@
     padding: 20px;
     margin: 10px 20px;
     font-size: 15pt;
+    width: 100%;
 }
 #release, #imdb, #language, #runtime{
 	display: inline-block;
@@ -104,7 +105,8 @@ button.button.tooltip-button{
 }
 .movie-links-container{
     float:left;
-    margin: 10px 0 10px 40px;
+    min-height: 50px;
+    margin: 20px 0 10px 40px;
 }
 .movie-links-container .movie-link{
     margin:0 20px 0 0;
